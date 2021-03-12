@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
-
+import welcome from '../components/welcome.vue'
+import users from '../components/user/users.vue'
 Vue.use(VueRouter)
 
  const router = new VueRouter({
@@ -10,10 +11,15 @@ Vue.use(VueRouter)
      { path: '/', redirect: '/login' },
     // { path: '/', redirect: '/home' },
     { path: '/login', component: Login },
-    { path: '/home', component: Home }
+     {
+       path: '/home',
+       component: Home,
+       redirect:'/welcome',
+       children:[{path:'/welcome',component:welcome},{path: '/users',component:users}]
+     }
   ]
  })
-
+// core-js/fn/array
 //router.beforeEach((to, from, next) => {
   //  to将要访问的路径
   // from 代表从哪个路径跳转而来

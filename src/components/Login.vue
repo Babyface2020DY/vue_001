@@ -4,6 +4,7 @@
             <div class="avatar_box">
                 <img src="../assets/logo.png" alt="">
             </div>
+            <!-- 登录注册表单 -->
             <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
                 <el-form-item prop="username">
                     <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
@@ -49,13 +50,13 @@ export default {
     login () {
     this.$refs.loginFormRef.validate ( async validate => {
         if (!validate) return;
-        const { data: res } = await this.$http.post ('login',this.loginFor);
+         const { data: res } = await this.$http.post ('login',this.loginFor);
           if (res.meta.status !== 200) return this.$message.error("登录失败");
-          this.$message.success("登录成功");
+           this.$message.success("登录成功");
           // 1.将登录成功之后的token保存到客户端的sessionStorage中
           // 1.1项目中除了登录之外的其他API接口，必须在登录之后才能访问
           // 1.2token只应在当前网站打开期间生效，所以应将token保存在sessionStorge中
-          window.sessionStorage.setItem('token',res.data.token);
+           window.sessionStorage.setItem('token',res.data.token);
           // 2.通过编程式导航跳转到后台主页，路由地址是/home
           this.$router.push('/home');
           
